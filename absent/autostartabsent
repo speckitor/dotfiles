@@ -1,0 +1,4 @@
+setxkbmap -layout "us,ru" -option "grp:win_space_toggle" &
+nitrogen --restore &
+MONITOR=eDP-1-1 polybar &
+MONITOR=HDMI-1-1 polybar
