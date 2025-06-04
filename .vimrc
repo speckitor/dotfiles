@@ -18,5 +18,4 @@ set path+=**
 set autochdir
 set clipboard=unnamedplus
 set termguicolors
-colorscheme retrobox
-set background=dark
+colorscheme elflord
