@@ -1,8 +1,7 @@
 syntax on
-set tabstop=4
-set shiftwidth=4
 set expandtab
-autocmd FileType make setlocal noexpandtab
+autocmd FileType make setlocal noet
+autocmd FileType xml setlocal ts=2 sw=2 
 set ignorecase
 set smartcase
 set number
@@ -10,12 +9,13 @@ set relativenumber
 set guioptions -=m
 set guioptions -=T
 set cursorline
-set noesckeys
 set incsearch
 set modeline
 set hidden
 set path+=**
+set tags=tags;/
 set autochdir
 set clipboard=unnamedplus
 set termguicolors
-colorscheme elflord
+colorscheme unokai
+set background=dark
