@@ -4,12 +4,12 @@ vim.g.maplocalleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 
 vim.opt.showmode = false
 
 vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
+    vim.opt.clipboard = "unnamedplus"
 end)
 
 vim.opt.undofile = true
@@ -17,12 +17,20 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
 vim.o.expandtab = true
-
-vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.cmd("autocmd FileType make setlocal ts=4 sw=4 noet")
+vim.cmd("autocmd FileType cfg setlocal ts=2 sw=2")
+vim.cmd("autocmd FileType xml setlocal ts=2 sw=2")
+vim.cmd("autocmd FileType ui setlocal ts=2 sw=2")
+vim.cmd("autocmd FileType javascript setlocal ts=2 sw=2")
+vim.cmd("autocmd FileType typescript setlocal ts=2 sw=2")
+vim.cmd("autocmd FileType html setlocal ts=2 sw=2")
+vim.cmd("autocmd FileType css setlocal ts=2 sw=2")
+vim.cmd("autocmd FileType javascriptreact setlocal ts=2 sw=2")
+vim.cmd("autocmd FileType typescriptreact setlocal ts=2 sw=2")
+vim.cmd("autocmd FileType lua setlocal ts=4 sw=4")
+vim.cmd("autocmd FileType c setlocal ts=4 sw=4")
+vim.cmd("autocmd FileType cpp setlocal ts=4 sw=4")
 
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
@@ -30,7 +38,7 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.opt.inccommand = 'split'
+vim.opt.inccommand = "split"
 
 vim.opt.cursorline = true
 
@@ -40,46 +48,46 @@ vim.opt.confirm = true
 
 vim.cmd("cnoreabbrev sh horizontal terminal")
 
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>')
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
 
 vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]])
 vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]])
 vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]])
 vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]])
 
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>')
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>')
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>')
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>')
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>")
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>")
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>")
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+        vim.api.nvim_echo({
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out, "WarningMsg" },
+            { "\nPress any key to exit..." },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
+    end
 end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
-        "webhooked/kanso.nvim",
+        "dgox16/oldworld.nvim",
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd.colorscheme("kanso-zen")
-        end
+            vim.cmd.colorscheme("oldworld")
+        end,
     },
     {
         "nvim-treesitter/nvim-treesitter",
@@ -88,138 +96,210 @@ require("lazy").setup({
             local configs = require("nvim-treesitter.configs")
 
             configs.setup({
-                ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "python", "xml" },
+                ensure_installed = {
+                    "c",
+                    "lua",
+                    "vim",
+                    "vimdoc",
+                    "query",
+                    "elixir",
+                    "heex",
+                    "javascript",
+                    "html",
+                    "python",
+                    "xml",
+                },
                 sync_install = false,
                 highlight = { enable = true },
                 indent = { enable = true },
             })
-        end
-    },
-    {
-        'echasnovski/mini.nvim',
-        config = function()
-            require('mini.ai').setup()
-            require('mini.statusline').setup()
         end,
     },
     {
-        'nvim-telescope/telescope.nvim',
-        event = 'VimEnter',
-        branch = '0.1.x',
+        "nvim-telescope/telescope.nvim",
+        event = "VimEnter",
+        branch = "0.1.x",
         dependencies = {
-            'nvim-lua/plenary.nvim',
+            "nvim-lua/plenary.nvim",
         },
         config = function()
-            require('telescope').setup()
-            pcall(require('telescope').load_extension, 'fzf')
+            require("telescope").setup()
+            pcall(require("telescope").load_extension, "fzf")
 
-            local builtin = require 'telescope.builtin'
-            vim.keymap.set('n', '<leader>sf', builtin.find_files)
-            vim.keymap.set('n', '<leader>sg', builtin.live_grep)
-            vim.keymap.set('n', '<leader>sd', builtin.diagnostics)
-            vim.keymap.set('n', '<leader>sb', builtin.buffers)
+            local builtin = require("telescope.builtin")
+            vim.keymap.set("n", "<leader>sf", builtin.find_files)
+            vim.keymap.set("n", "<leader>sg", builtin.live_grep)
+            vim.keymap.set("n", "<leader>sd", builtin.diagnostics)
+            vim.keymap.set("n", "<leader>sb", builtin.buffers)
         end,
     },
     {
-        'neovim/nvim-lspconfig',
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require("lualine").setup()
+        end,
+    },
+    {
+        "neovim/nvim-lspconfig",
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
+            "WhoIsSethDaniel/mason-tool-installer.nvim",
             "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
             require("mason").setup()
-            require("mason-lspconfig").setup {
+            require("mason-lspconfig").setup({
                 ensure_installed = {
                     "lua_ls",
                     "rust_analyzer",
+                    "ts_ls",
+                    "cssls",
+                    "html",
+                    "tailwindcss",
                     "clangd",
                     "pyright",
                 },
-            }
-
-            vim.api.nvim_create_autocmd('LspAttach', {
-              desc = 'LSP actions',
-              callback = function(event)
-                local opts = {buffer = event.buf}
-
-                vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-                vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-                vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-                vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-                vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-                vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-                vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-                vim.keymap.set('n', 'ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-              end,
+            })
+            require("mason-tool-installer").setup({
+                ensure_installed = {
+                    "clang-format",
+                    "stylua",
+                    "isort",
+                    "black",
+                    "prettier",
+                    "prettierd",
+                },
             })
 
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
+            vim.api.nvim_create_autocmd("LspAttach", {
+                desc = "LSP actions",
+                callback = function(event)
+                    local opts = { buffer = event.buf }
 
-            require("lspconfig").lua_ls.setup({capabilities = capabilities})
-            require("lspconfig").rust_analyzer.setup({capabilities = capabilities})
-            require("lspconfig").clangd.setup({
-                capabilities = capabilities,
-                cmd = {"clangd", "--header-insertion=never"}
+                    vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+                    vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+                    vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+                    vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+                    vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
+                    vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+                    vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+                    vim.keymap.set("n", "ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+                end,
             })
-            require("lspconfig").pyright.setup({capabilities = capabilities})
-        end
+
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+            require("lspconfig").lua_ls.setup({ capabilities = capabilities })
+            require("lspconfig").ts_ls.setup({ capabilities = capabilities })
+            require("lspconfig").cssls.setup({ capabilities = capabilities })
+            require("lspconfig").html.setup({ capabilities = capabilities })
+            require("lspconfig").tailwindcss.setup({ capabilities = capabilities })
+            require("lspconfig").rust_analyzer.setup({ capabilities = capabilities })
+            require("lspconfig").clangd.setup({ capabilities = capabilities })
+            require("lspconfig").pyright.setup({ capabilities = capabilities })
+
+            vim.lsp.config("clangd", {
+                cmd = {
+                    "clangd",
+                    "--clang-tidy",
+                    "--header-insertion=never",
+                },
+            })
+        end,
     },
     {
-        'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
+        "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
         dependencies = {
             {
-                'L3MON4D3/LuaSnip',
+                "L3MON4D3/LuaSnip",
                 build = (function()
-                    if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+                    if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
                         return
                     end
-                    return 'make install_jsregexp'
+                    return "make install_jsregexp"
                 end)(),
                 dependencies = {},
             },
-            'saadparwaiz1/cmp_luasnip',
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
-            'hrsh7th/cmp-nvim-lsp-signature-help',
+            "saadparwaiz1/cmp_luasnip",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
         },
         config = function()
-            local cmp = require 'cmp'
-            local luasnip = require 'luasnip'
-            luasnip.config.setup {}
+            local cmp = require("cmp")
+            local luasnip = require("luasnip")
+            luasnip.config.setup({})
 
-            cmp.setup {
+            cmp.setup({
                 snippet = {
-                expand = function(args)
-                    luasnip.lsp_expand(args.body)
-                end,
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end,
                 },
-                completion = { completeopt = 'menu,menuone,noinsert' },
-                mapping = cmp.mapping.preset.insert {
-                    ['<C-n>'] = cmp.mapping.select_next_item(),
-                    ['<C-p>'] = cmp.mapping.select_prev_item(),
-                    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-                    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-                    ['<C-y>'] = cmp.mapping.confirm { select = true },
-                    ['<S-Tab>'] = cmp.mapping.complete {},
-                },
+                completion = { completeopt = "menu,menuone,noinsert" },
+                mapping = cmp.mapping.preset.insert({
+                    ["<C-n>"] = cmp.mapping.select_next_item(),
+                    ["<C-p>"] = cmp.mapping.select_prev_item(),
+                    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+                    ["<S-Tab>"] = cmp.mapping.complete({}),
+                }),
                 sources = {
-                    { name = 'nvim_lsp' },
-                    { name = 'luasnip' },
-                    { name = 'path' },
-                    { name = 'buffer' },
-                    { name = 'nvim_lsp_signature_help' },
+                    { name = "nvim_lsp" },
+                    { name = "luasnip" },
+                    { name = "path" },
+                    { name = "buffer" },
+                    { name = "nvim_lsp_signature_help" },
                 },
+            })
+        end,
+    },
+    {
+        "stevearc/conform.nvim",
+        config = function()
+            require("conform").setup({
+                formatters_by_ft = {
+                    lua = { "stylua" },
+                    python = { "isort", "black" },
+                    rust = { "rustfmt", lsp_format = "fallback" },
+                    javascript = { "prettierd", "prettier", stop_after_first = true },
+                    c = { "clang-format" },
+                    cpp = { "clang-format" },
+                },
+                format_on_save = {
+                    timeout_ms = 500,
+                    lsp_format = "fallback",
+                },
+                formatters = {
+                    c = {},
+                },
+            })
+
+            require("conform").formatters.stylua = {
+                command = "stylua",
+                args = { "--indent-type", "Spaces", "-" },
+                stdin = true,
             }
         end,
     },
     {
-        'santigo-zero/right-corner-diagnostics.nvim',
-        event = 'LspAttach',
-        config = function ()
-            require('rcd').setup()
-        end
-    }
+        "santigo-zero/right-corner-diagnostics.nvim",
+        event = "LspAttach",
+        config = function()
+            vim.diagnostic.config({
+                virtual_text = false,
+                update_in_insert = false,
+            })
+
+            require("rcd").setup({
+                position = "top",
+                auto_cmds = true,
+            })
+        end,
+    },
 })
