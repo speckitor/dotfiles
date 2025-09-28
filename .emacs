@@ -34,10 +34,6 @@
 (ido-mode 1)
 (ido-everywhere 1)
 
-(global-set-key (kbd "C-,") 'duplicate-line)
-
-(global-set-key (kbd "C-c c") 'compile)
-
 (load-file "~/.emacs.local/simpc-mode.el")
 (require 'simpc-mode)
 (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
@@ -63,15 +59,6 @@
   (smex-initialize)
   :bind ("M-x" . smex))
 
-(use-package multiple-cursors
-  :ensure t
-  :bind (("C-S-c C-S-c" . mc/edit-lines)
-         ("C->" . mc/mark-next-like-this)
-         ("C-<" . mc/mark-previous-like-this) 
-         ("C-c C-<" . mc/mark-all-like-this)
-         ("C-\"" . mc/skip-to-next-like-this)
-         ("C-:" . mc/skip-to-previous-like-this)))
-
 (use-package evil
   :ensure t
   :init
@@ -84,6 +71,11 @@
   :ensure t
   :config
   (evil-collection-init))
+
+(use-package evil-multiedit
+  :ensure t
+  :config
+  (evil-multiedit-default-keybinds))
 
 (use-package magit
   :ensure t
