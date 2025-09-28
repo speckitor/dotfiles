@@ -71,3 +71,12 @@
          ("C-c C-<" . mc/mark-all-like-this)
          ("C-\"" . mc/skip-to-next-like-this)
          ("C-:" . mc/skip-to-previous-like-this)))
+
+(use-package evil
+  :ensure t
+  :init
+  (evil-mode 1))
+
+(use-package magit
+  :ensure t
+  :bind ("C-x g" . magit-status))
