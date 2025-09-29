@@ -66,6 +66,8 @@
   :config
   (evil-mode 1))
 
+(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+
 (use-package evil-collection
   :after evil
   :ensure t
