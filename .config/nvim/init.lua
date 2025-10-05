@@ -82,11 +82,13 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
-        "dgox16/oldworld.nvim",
-        lazy = false,
+        "navarasu/onedark.nvim",
         priority = 1000,
         config = function()
-            vim.cmd.colorscheme("oldworld")
+            require("onedark").setup({
+                style = "darker",
+            })
+            require("onedark").load()
         end,
     },
     {
@@ -164,7 +166,6 @@ require("lazy").setup({
             })
             require("mason-tool-installer").setup({
                 ensure_installed = {
-                    "clang-format",
                     "stylua",
                     "isort",
                     "black",
@@ -191,14 +192,14 @@ require("lazy").setup({
 
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-            require("lspconfig").lua_ls.setup({ capabilities = capabilities })
-            require("lspconfig").ts_ls.setup({ capabilities = capabilities })
-            require("lspconfig").cssls.setup({ capabilities = capabilities })
-            require("lspconfig").html.setup({ capabilities = capabilities })
-            require("lspconfig").tailwindcss.setup({ capabilities = capabilities })
-            require("lspconfig").rust_analyzer.setup({ capabilities = capabilities })
-            require("lspconfig").clangd.setup({ capabilities = capabilities })
-            require("lspconfig").pyright.setup({ capabilities = capabilities })
+            vim.lsp.config("lua_ls", {})
+            vim.lsp.config("ts_ls", {})
+            vim.lsp.config("cssls", {})
+            vim.lsp.config("html", {})
+            vim.lsp.config("tailwindcss", {})
+            vim.lsp.config("rust_analyzer", {})
+            vim.lsp.config("clangd", {})
+            vim.lsp.config("pyright", {})
 
             vim.lsp.config("clangd", {
                 cmd = {
@@ -268,15 +269,10 @@ require("lazy").setup({
                     python = { "isort", "black" },
                     rust = { "rustfmt", lsp_format = "fallback" },
                     javascript = { "prettierd", "prettier", stop_after_first = true },
-                    c = { "clang-format" },
-                    cpp = { "clang-format" },
                 },
                 format_on_save = {
                     timeout_ms = 500,
                     lsp_format = "fallback",
-                },
-                formatters = {
-                    c = {},
                 },
             })
 
