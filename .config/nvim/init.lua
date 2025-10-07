@@ -82,13 +82,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
-        "navarasu/onedark.nvim",
+        "Mofiqul/dracula.nvim",
         priority = 1000,
         config = function()
-            require("onedark").setup({
-                style = "darker",
-            })
-            require("onedark").load()
+            vim.cmd("colorscheme dracula")
         end,
     },
     {
@@ -139,7 +136,11 @@ require("lazy").setup({
         "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
-            require("lualine").setup()
+            require("lualine").setup({
+                options = {
+                    theme = "dracula-nvim",
+                },
+            })
         end,
     },
     {
@@ -162,6 +163,8 @@ require("lazy").setup({
                     "tailwindcss",
                     "clangd",
                     "pyright",
+                    "zls",
+                    "emmet_language_server"
                 },
             })
             require("mason-tool-installer").setup({
@@ -198,8 +201,9 @@ require("lazy").setup({
             vim.lsp.config("html", {})
             vim.lsp.config("tailwindcss", {})
             vim.lsp.config("rust_analyzer", {})
-            vim.lsp.config("clangd", {})
             vim.lsp.config("pyright", {})
+            vim.lsp.config("zls", {})
+            vim.lsp.config("emmet_language_server", {})
 
             vim.lsp.config("clangd", {
                 cmd = {
@@ -270,10 +274,6 @@ require("lazy").setup({
                     rust = { "rustfmt", lsp_format = "fallback" },
                     javascript = { "prettierd", "prettier", stop_after_first = true },
                 },
-                format_on_save = {
-                    timeout_ms = 500,
-                    lsp_format = "fallback",
-                },
             })
 
             require("conform").formatters.stylua = {
@@ -281,6 +281,13 @@ require("lazy").setup({
                 args = { "--indent-type", "Spaces", "-" },
                 stdin = true,
             }
+
+            vim.keymap.set("n", "<leader>f", function()
+                require("conform").format({
+                    async = true,
+                    lsp_fallback = true,
+                })
+            end, { desc = "Format file with Conform" })
         end,
     },
     {
