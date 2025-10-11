@@ -45,13 +45,7 @@
 
 (use-package company
   :bind (("C-." . company-complete))
-  :custom
-  (company-idle-delay 0)
-  (company-dabbrev-downcase nil)
-  (company-show-numbers t)
-  (company-tooltip-limit 10)
-  :config
-  (global-company-mode))
+  :config (global-company-mode))
 
 (use-package smex
   :ensure t

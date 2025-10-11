@@ -13,13 +13,12 @@ vim.o.clipboard = "unnamedplus"
 vim.o.winborder = "rounded"
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<C-x><C-j>", "<cmd>Ex<CR>")
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
-
 vim.pack.add({
     { src = "https://github.com/ellisonleao/gruvbox.nvim" },
     { src = "https://github.com/neovim/nvim-lspconfig" },
+    { src = "https://github.com/nvim-lua/plenary.nvim" },
+    { src = "https://github.com/m00qek/baleia.nvim" },
+    { src = "https://github.com/ej-shafran/compile-mode.nvim" },
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -41,3 +40,12 @@ vim.lsp.enable({
     "pyright",
     "rust_analyzer",
 })
+
+vim.g.compile_mode = {
+    baleia_setup = true,
+}
+
+vim.keymap.set("n", "<C-x><C-j>", "<cmd>Ex<CR>")
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
+vim.keymap.set("n", "<C-x>c", ":below Compile ")
