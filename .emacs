@@ -35,26 +35,61 @@
 (ido-everywhere 1)
 
 (load-file "~/.emacs.local/simpc-mode.el")
-(require 'simpc-mode)
-(add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
 
-(use-package gruber-darker-theme
-  :ensure t
+(setq c-default-style
+      '((c-mode . "linux")))
+
+(defun my-c-mode-hook ()
+  (setq c-basic-offset 4)
+  (setq indent-tabs-mode nil))
+(add-hook 'c-mode-hook 'my-c-mode-hook)
+
+(use-package gruvbox-theme
   :config
-  (load-theme 'gruber-darker t))
+  (load-theme 'gruvbox-dark-hard t))
+
+(use-package tree-sitter)
+
+(use-package tree-sitter-langs)
+
+(require 'tree-sitter)
+(require 'tree-sitter-langs)
+
+(global-tree-sitter-mode)
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+
+(use-package projectile)
+
+(use-package lsp-mode)
+(use-package lsp-ui
+  :custom
+  (lsp-ui-doc-position 'at-point))
+
+(use-package lsp-pyright
+  :ensure t
+  :custom (lsp-pyright-langserver-command "pyright")
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))
+
+(add-hook 'c-mode-hook 'lsp)
+(add-hook 'c++-mode-hook 'lsp)
+(add-hook 'python-mode-hook 'lsp)
+
+(setq lsp-enable-symbol-highlighting nil)
+(setq lsp-headerline-breadcrumb-enable nil)
 
 (use-package company
-  :bind (("C-." . company-complete))
+  :bind
+  (("C-n" . company-complete))
   :config (global-company-mode))
 
 (use-package smex
-  :ensure t
   :init
   (smex-initialize)
   :bind ("M-x" . smex))
 
 (use-package evil
-  :ensure t
   :init
   (setq evil-want-keybinding nil)
   :config
@@ -64,15 +99,20 @@
 
 (use-package evil-collection
   :after evil
-  :ensure t
   :config
   (evil-collection-init))
 
 (use-package evil-multiedit
-  :ensure t
   :config
   (evil-multiedit-default-keybinds))
 
 (use-package magit
-  :ensure t
   :bind ("C-x g" . magit-status))
+
+(with-eval-after-load 'lsp-ui
+  (evil-define-key 'normal lsp-mode-map
+                   (kbd "K") #'lsp-ui-doc-glance))
+
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "C-y") #'company-complete-selection)
+  (define-key company-active-map (kbd "RET") nil))

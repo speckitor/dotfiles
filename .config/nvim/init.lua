@@ -19,6 +19,7 @@ vim.pack.add({
     { src = "https://github.com/nvim-lua/plenary.nvim" },
     { src = "https://github.com/m00qek/baleia.nvim" },
     { src = "https://github.com/ej-shafran/compile-mode.nvim" },
+    { src = "https://github.com/L3MON4D3/LuaSnip" },
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -39,6 +40,7 @@ vim.lsp.enable({
     "clangd",
     "pyright",
     "rust_analyzer",
+    "emmet_language_server",
 })
 
 vim.g.compile_mode = {
@@ -48,4 +50,13 @@ vim.g.compile_mode = {
 vim.keymap.set("n", "<C-x><C-j>", "<cmd>Ex<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
-vim.keymap.set("n", "<C-x>c", ":below Compile ")
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
+vim.keymap.set("n", "<M-x>c", ":below Compile ")
+
+require("luasnip").setup({ enable_autosnippets = true })
+require("luasnip.loaders.from_snipmate").load({ paths = "~/.config/nvim/snippets" })
+
+local ls = require("luasnip")
+vim.keymap.set({"i"}, "<C-e>", function() ls.expand() end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump( 1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-K>", function() ls.jump(-1) end, {silent = true})
