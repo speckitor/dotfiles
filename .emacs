@@ -37,20 +37,24 @@
 (load-file "~/.emacs.local/simpc-mode.el")
 
 (setq c-default-style
-      '((c-mode . "linux")))
+      '((c-mode . "gnu")))
 
 (defun my-c-mode-hook ()
   (setq c-basic-offset 4)
   (setq indent-tabs-mode nil))
 (add-hook 'c-mode-hook 'my-c-mode-hook)
 
-(use-package gruvbox-theme
+(use-package doom-themes
   :config
-  (load-theme 'gruvbox-dark-hard t))
+  (load-theme 'doom-laserwave t))
 
-(use-package tree-sitter)
+(use-package org-modern)
 
-(use-package tree-sitter-langs)
+(setq org-modern-hide-stars 'leading)
+(setq org-modern-fold-stars '(("▾" . "●") ("▸" . "○")))
+(add-hook 'org-mode-hook #'org-indent-mode)
+
+(global-org-modern-mode)
 
 (require 'tree-sitter)
 (require 'tree-sitter-langs)
@@ -58,26 +62,14 @@
 (global-tree-sitter-mode)
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
-(use-package projectile)
+(use-package haskell-mode)
 
-(use-package lsp-mode)
-(use-package lsp-ui
-  :custom
-  (lsp-ui-doc-position 'at-point))
-
-(use-package lsp-pyright
-  :ensure t
-  :custom (lsp-pyright-langserver-command "pyright")
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp))))
-
-(add-hook 'c-mode-hook 'lsp)
-(add-hook 'c++-mode-hook 'lsp)
-(add-hook 'python-mode-hook 'lsp)
-
-(setq lsp-enable-symbol-highlighting nil)
-(setq lsp-headerline-breadcrumb-enable nil)
+(add-hook 'haskell-mode-hook #'haskell-indentation-mode)
+(setq haskell-indentation-layout-offset 4
+      haskell-indentation-left-offset 4
+      haskell-indentation-starter-offset 4
+      haskell-indentation-where-pre-offset 4
+      haskell-indentation-where-post-offset 4)
 
 (use-package company
   :bind
@@ -108,10 +100,6 @@
 
 (use-package magit
   :bind ("C-x g" . magit-status))
-
-(with-eval-after-load 'lsp-ui
-  (evil-define-key 'normal lsp-mode-map
-                   (kbd "K") #'lsp-ui-doc-glance))
 
 (with-eval-after-load 'company
   (define-key company-active-map (kbd "C-y") #'company-complete-selection)
