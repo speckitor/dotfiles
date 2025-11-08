@@ -42,10 +42,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
-        "scottmckendry/cyberdream.nvim",
+        "blazkowolf/gruber-darker.nvim",
         priority = 1000,
         config = function()
-            vim.cmd("colorscheme cyberdream")
+            vim.cmd("colorscheme gruber-darker")
         end,
     },
     {
@@ -62,7 +62,6 @@ require("lazy").setup({
             })
         end,
     },
-    { 'nvim-mini/mini.comment', version = false },
     {
         "nvim-telescope/telescope.nvim", tag = "0.1.8",
         dependencies = { "nvim-lua/plenary.nvim" },
@@ -96,7 +95,6 @@ require("lazy").setup({
                 "clangd",
                 "rust_analyzer",
                 "pyright",
-                "glsl_analyzer",
             })
         end,
     },

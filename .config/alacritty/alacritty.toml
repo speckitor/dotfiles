@@ -1,26 +1,26 @@
 [colors.primary]
-background = '#000000'
-foreground = '#ffffff'
+background = "#1c1c1c"
+foreground = "#E4E4E4"
 
 [colors.normal]
-black   = '#000000'
-red     = '#cd0000'
-green   = '#00cd00'
-yellow  = '#cdcd00'
-blue    = '#0000ee'
-magenta = '#cd00cd'
-cyan    = '#00cdcd'
-white   = '#e5e5e5'
+black   = "#181818"
+red     = "#F43841"
+green   = "#73D936"
+yellow  = "#FFDD33"
+blue    = "#96A6C8"
+magenta = "#9E95C7"
+cyan    = "#95A99F"
+white   = "#E4E4E4"
 
 [colors.bright]
-black   = '#7f7f7f'
-red     = '#ff0000'
-green   = '#00ff00'
-yellow  = '#ffff00'
-blue    = '#5c5cff'
-magenta = '#ff00ff'
-cyan    = '#00ffff'
-white   = '#ffffff'
+black   = "#52494E"
+red     = "#FF4F58"
+green   = "#73D936"
+yellow  = "#FFDD33"
+blue    = "#96A6C8"
+magenta = "#AFAFD7"
+cyan    = "#95A99F"
+white   = "#F5F5F5"
 
 [font]
 normal = { family = "IosevkaTermNerdFont" }

@@ -1,6 +1,6 @@
 [[ $- != *i* ]] && return
 
-alias vim='nvim'
+alias vim=nvim
 alias ls='ls -C --color=auto -hr'
 alias grep='grep --color=auto'
 alias date='date -R'
