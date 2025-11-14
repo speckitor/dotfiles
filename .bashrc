@@ -8,11 +8,10 @@ function ts () {
     fi
 }
 
-alias v=nvim
-alias vim=nvim
+alias fastfetch='fastfetch --color magenta --logo-color-1 magenta --logo-color-2 white'
 alias ls='ls -C --color=auto -hr'
 alias grep='grep --color=auto'
 alias date='date -R'
-alias b='v ~/.bashrc && . ~/.bashrc'
 
-PS1='[\[\e[0;31m\]\u\[\e[0;0m\]@\h \[\e[0;32m\]\W\[\e[0;0m\]] $ '
+PS1='[\[\e[0;35m\]\u\[\e[0;0m\]@\h \[\e[0;34m\]\W\[\e[0;0m\]] $ '
+. "$HOME/.cargo/env"
