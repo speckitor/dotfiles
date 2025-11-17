@@ -16,12 +16,15 @@ set expandtab
 set splitbelow
 set splitright
 set list
-set listchars="tab:>-,space:·,multispace:···|"
+set listchars=tab:>-,space:·,multispace:···|
+let mapleader=" "
 
 vnoremap ; :
 vnoremap ; :
 nnoremap ; :
 nnoremap ; :
+
+nnoremap <leader>f <cmd>Ex<CR>
 
 nnoremap <Esc> <cmd>nohlsearch<CR>
 tnoremap <Esc> <C-\\><C-n>
