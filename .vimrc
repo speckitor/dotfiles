@@ -9,10 +9,10 @@ set ignorecase
 set smartcase
 set scrolloff=7
 set noswapfile
-set clipboard="unnamedplus"
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set clipboard=unnamedplus
 set splitbelow
 set splitright
 set list
@@ -29,4 +29,5 @@ nnoremap <leader>f <cmd>Ex<CR>
 nnoremap <Esc> <cmd>nohlsearch<CR>
 tnoremap <Esc> <C-\\><C-n>
 
-colorscheme sorbet
+colorscheme retrobox
+set background=dark
