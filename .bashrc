@@ -9,7 +9,7 @@ function ts () {
         )" && tmux new -A -c "$dir" -s "$dir"'
     else
         dir="$(
-            find ~/programming/ ~/programming/probe/ -maxdepth 1 -type d |
+            find ~/ ~/programming/ ~/programming/probe/ -maxdepth 1 -type d |
             fzf |
             xargs realpath
         )" && tmux new -A -c "$dir" -s "$dir"
