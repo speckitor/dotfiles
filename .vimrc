@@ -16,7 +16,7 @@ set clipboard=unnamedplus
 set splitbelow
 set splitright
 set list
-set listchars=tab:>-,space:·,multispace:···|
+set listchars=tab:>-,space:·,multispace:···\|
 let mapleader=" "
 
 vnoremap ; :
