@@ -1,35 +1,31 @@
 [colors.primary]
-background = "#1c1c1c"
-foreground = "#ebdbb2"
-
-[colors.cursor]
-text = "#1c1c1c"
-cursor = "#ebdbb2"
+background = '#282828'
+foreground = '#ebdbb2'
 
 [colors.normal]
-black   = "#1c1c1c"
-red     = "#cc241d"
-green   = "#98971a"
-yellow  = "#d79921"
-blue    = "#458588"
-magenta = "#b16286"
-cyan    = "#689d6a"
-white   = "#a89984"
+black   = '#282828'
+red     = '#cc241d'
+green   = '#98971a'
+yellow  = '#d79921'
+blue    = '#458588'
+magenta = '#b16286'
+cyan    = '#689d6a'
+white   = '#a89984'
 
 [colors.bright]
-black   = "#928374"
-red     = "#fb5944"
-green   = "#b8bb26"
-yellow  = "#fabd2f"
-blue    = "#83a598"
-magenta = "#d3869b"
-cyan    = "#8ec07c"
-white   = "#ebdbb2"
+black   = '#928374'
+red     = '#fb4934'
+green   = '#b8bb26'
+yellow  = '#fabd2f'
+blue    = '#83a598'
+magenta = '#d3869b'
+cyan    = '#8ec07c'
+white   = '#ebdbb2'
 
 [font]
-normal = { family = "IosevkaTermNerdFont" }
-bold = { family = "IosevkaTermNerdFont" }
-italic = { family = "IosevkaTermNerdFont" }
-bold_italic = { family = "IosevkaTermNerdFont" }
-size = 14.0
+normal = { family = "IosevkaNF" }
+bold = { family = "IosevkaNF" }
+italic = { family = "IosevkaNF" }
+bold_italic = { family = "IosevkaNF" }
+size = 12.0
 offset = { x = 1, y = -1 }
