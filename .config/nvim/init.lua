@@ -56,20 +56,20 @@ require("lazy").setup({
         end
     },
     {
-        "mini.pairs",
+        "nvim-mini/mini.pairs",
         config = function()
             require("mini.pairs").setup()
         end
     },
     {
-        "mini.files",
+        "nvim-mini/mini.files",
         config = function()
             require("mini.files").setup()
             vim.keymap.set("n", "<leader>d", "<cmd>lua MiniFiles.open()<CR>")
         end
     },
     {
-        "mini.pick",
+        "nvim-mini/mini.pick",
         config = function()
             require("mini.pick").setup()
             vim.keymap.set("n", "<leader>f", "<cmd>Pick files<CR>")
