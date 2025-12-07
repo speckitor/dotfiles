@@ -1,6 +1,7 @@
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.cursorline = true
+-- vim.o.signcolumn = "yes"
 vim.o.winborder = "rounded"
 vim.o.incsearch = true
 vim.o.ignorecase = true
@@ -15,30 +16,65 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.list = true
 vim.o.listchars = "tab:>-,space:·,multispace:···|"
+
 vim.g.mapleader = " "
+
+vim.keymap.set({ "n", "v", "t" }, ";", ":")
+vim.keymap.set({ "n", "v", "t" }, ":", ";")
+
+vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>")
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+
+vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>")
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+
+vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y")
+vim.keymap.set({ "n", "v" }, "<leader>p", "\"+P")
+
+vim.keymap.set("n", "<leader>ct", "<cmd>!ctags -R .<CR>")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-    if vim.v.shell_error ~= 0 then
-        vim.api.nvim_echo({
-            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-            { out, "WarningMsg" },
-            { "\nPress any key to exit..." },
-        }, true, {})
-        vim.fn.getchar()
-        os.exit(1)
-    end
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
 vim.opt.rtp:prepend(lazypath)
-
 require("lazy").setup({
     {
-        "ellisonleao/gruvbox.nvim",
-        priority = 1000,
+        "dgox16/oldworld.nvim",
         config = function()
-            vim.cmd("colorscheme gruvbox")
+            vim.cmd("colorscheme oldworld")
+        end
+    },
+    {
+        "mini.pairs",
+        config = function()
+            require("mini.pairs").setup()
+        end
+    },
+    {
+        "mini.files",
+        config = function()
+            require("mini.files").setup()
+            vim.keymap.set("n", "<leader>d", "<cmd>lua MiniFiles.open()<CR>")
+        end
+    },
+    {
+        "mini.pick",
+        config = function()
+            require("mini.pick").setup()
+            vim.keymap.set("n", "<leader>f", "<cmd>Pick files<CR>")
+            vim.keymap.set("n", "<leader>b", "<cmd>Pick buffers<CR>")
+            vim.keymap.set("n", "<leader>g", "<cmd>Pick grep_live<CR>")
         end
     },
     {
@@ -54,16 +90,6 @@ require("lazy").setup({
                 indent = { enable = true },
             })
         end,
-    },
-    {
-        "nvim-telescope/telescope.nvim", tag = "0.1.8",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function ()
-            local builtin = require("telescope.builtin")
-            vim.keymap.set("n", "<leader>f", builtin.find_files)
-            vim.keymap.set("n", "<leader>g", builtin.live_grep)
-            vim.keymap.set("n", "<leader>b", builtin.buffers)
-        end
     },
     {
         "neovim/nvim-lspconfig",
@@ -112,3 +138,4 @@ require("lazy").setup({
         opts_extend = { "sources.default" }
     },
 })
+
