@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-if [ "$TERM_PROGRAM" == "tmux" ]; then
+if [[ "$TERM_PROGRAM" == "tmux" ]]; then
     tmux detach -E 'dir="$(find ~/ ~/programming ~/programming/probe -maxdepth 1 -type d | fzf | xargs realpath)" && tmux new -A -c "$dir" -s "$dir"'
 else
     dir="$(find ~/ ~/programming ~/programming/probe -maxdepth 1 -type d | fzf | xargs realpath)" && tmux new -A -c "$dir" -s "$dir"

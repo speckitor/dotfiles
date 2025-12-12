@@ -1,14 +1,14 @@
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.cursorline = true
--- vim.o.signcolumn = "yes"
+vim.o.signcolumn = "yes"
 vim.o.winborder = "rounded"
 vim.o.incsearch = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.scrolloff = 7
 vim.o.swapfile = false
-vim.o.clipboard = "unnamedplus"
+-- vim.o.clipboard = "unnamedplus"
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
@@ -31,8 +31,6 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y")
 vim.keymap.set({ "n", "v" }, "<leader>p", "\"+P")
 
-vim.keymap.set("n", "<leader>ct", "<cmd>!ctags -R .<CR>")
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -48,24 +46,19 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 vim.opt.rtp:prepend(lazypath)
+
 require("lazy").setup({
     {
-        "dgox16/oldworld.nvim",
+        "nyoom-engineering/oxocarbon.nvim",
         config = function()
-            vim.cmd("colorscheme oldworld")
-        end
-    },
-    {
-        "nvim-mini/mini.pairs",
-        config = function()
-            require("mini.pairs").setup()
+            vim.cmd("colorscheme oxocarbon")
         end
     },
     {
         "nvim-mini/mini.files",
         config = function()
             require("mini.files").setup()
-            vim.keymap.set("n", "<leader>d", "<cmd>lua MiniFiles.open()<CR>")
+            vim.keymap.set("n", "<leader>o", "<cmd>lua MiniFiles.open()<CR>")
         end
     },
     {
@@ -115,6 +108,7 @@ require("lazy").setup({
                 "rust_analyzer",
                 "pylsp",
                 "hls",
+                "zls",
             })
 
             vim.lsp.config("clangd", {
