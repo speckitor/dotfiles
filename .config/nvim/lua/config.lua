@@ -1,4 +1,4 @@
-vim.cmd.colorscheme "lunaperche"
+vim.cmd.colorscheme "wildcharm"
 
 vim.opt.number = true
 vim.opt.relativenumber = true
