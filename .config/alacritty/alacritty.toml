@@ -1,2 +1,7 @@
-[general]
-import = ["./xterm.toml"]
+[font]
+normal = { family = "Iosevka" }
+bold = { family = "Iosevka" }
+italic = { family = "Iosevka" }
+bold_italic = { family = "Iosevka" }
+size = 14
+offset = { x = 1, y = -1 }

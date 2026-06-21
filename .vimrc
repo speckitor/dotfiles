@@ -1,0 +1,23 @@
+syntax on
+colorscheme habamax
+set background=dark
+
+set number
+set relativenumber
+set cursorline
+set noesckeys
+set updatetime=50
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set incsearch
+set ignorecase
+set smartcase
+set scrolloff=7
+set noswapfile
+set nobackup
+set clipboard=unnamedplus
+set splitbelow
+set splitright
+set list
+set listchars=tab:>-
